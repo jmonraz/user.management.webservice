@@ -13,12 +13,12 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("users")
+@RequestMapping(value = "/api/users")
 public class UserController {
     private UserService userService;
 
     // REST API for user creation
-    @PostMapping("addUser")
+    @PostMapping("/addUser")
     public ResponseEntity<String> createUser(@RequestBody UserRegistrationDto userRegistrationDto) throws NoSuchAlgorithmException {
         String httResponse = userService.createUser(userRegistrationDto);
         return new ResponseEntity<>(httResponse, HttpStatus.CREATED);
