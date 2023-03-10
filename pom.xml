@@ -38,12 +38,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.googlecode.libphonenumber/libphonenumber -->
-        <dependency>
-            <groupId>com.googlecode.libphonenumber</groupId>
-            <artifactId>libphonenumber</artifactId>
-            <version>8.13.7</version>
-        </dependency>
 
     </dependencies>
 
