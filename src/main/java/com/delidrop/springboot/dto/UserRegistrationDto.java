@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
 
 @Getter
 @Setter
@@ -17,5 +16,5 @@ public class UserRegistrationDto {
     private String email;
     private String password;
     private String verifyPassword;
-    private String phoneNumber;
+    private Long phoneNumber;
 }

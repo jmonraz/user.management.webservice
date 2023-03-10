@@ -2,10 +2,8 @@ package com.delidrop.springboot.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -16,7 +14,7 @@ import java.util.UUID;
 //@Table(name = "users")
 public class User {
     //@Id
-    //@GenereatedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
     //@Column(nullable = false)
     private String firstName;
@@ -27,9 +25,9 @@ public class User {
     //@Column(nullable = false)
     private String password;
     //@Column(nullable = false, unique = true)
-    private String phoneNumber;
+    private Long phoneNumber;
     //@Column(nullable = false)
-    private String dateCreated;
+    private Date dateCreated;
     //@Column(nullable = false)
-    private String dateUpdated;
+    private Date dateUpdated;
 }

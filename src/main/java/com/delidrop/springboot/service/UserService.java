@@ -3,12 +3,10 @@ package com.delidrop.springboot.service;
 import com.delidrop.springboot.dto.UserInfoDto;
 import com.delidrop.springboot.dto.UserRegistrationDto;
 import com.delidrop.springboot.entity.User;
+import com.delidrop.springboot.helper.Helper;
 import com.delidrop.springboot.mapper.UserMapper;
 import com.delidrop.springboot.repository.IUserRepository;
-import com.delidrop.springboot.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
@@ -20,11 +18,28 @@ import java.util.stream.Collectors;
 public class UserService {
     private IUserRepository userRepository;
 
-    public UserInfoDto createUser(UserRegistrationDto userRegistrationDto) throws NoSuchAlgorithmException {
-        User user = UserMapper.mapUserRegistrationDtoToUser(userRegistrationDto);
-        User insertedUser = userRepository.insertUser(user);
-        UserInfoDto userInfoDto = UserMapper.mapUserToUserInfoDto(insertedUser);
-        return userInfoDto;
+    public String createUser(UserRegistrationDto userRegistrationDto) throws NoSuchAlgorithmException {
+        boolean canBeCreated = true;
+        String httpResponse = "Errors.";
+
+        if(!Helper.verifyPhoneNumber(userRegistrationDto.getPhoneNumber())) {
+            httpResponse += "\nInvalid phone number.";
+            canBeCreated = false;
+        }
+        if(!userRegistrationDto.getPassword().equals(userRegistrationDto.getVerifyPassword())) {
+            httpResponse += "\nPasswords do not match.";
+            canBeCreated = false;
+        }
+
+        if(canBeCreated)
+        {
+            User user = UserMapper.mapUserRegistrationDtoToUser(userRegistrationDto);
+            userRepository.insertUser(user);
+            httpResponse = "User successfully created";
+        }
+
+
+        return httpResponse;
     }
 
     public List<UserInfoDto> getAllUsers() {

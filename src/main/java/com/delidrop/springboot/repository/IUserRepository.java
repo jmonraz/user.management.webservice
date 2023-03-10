@@ -1,6 +1,5 @@
 package com.delidrop.springboot.repository;
 
-import com.delidrop.springboot.dto.UserRegistrationDto;
 import com.delidrop.springboot.entity.User;
 
 import java.security.NoSuchAlgorithmException;
