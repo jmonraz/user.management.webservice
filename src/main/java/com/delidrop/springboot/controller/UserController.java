@@ -19,9 +19,9 @@ public class UserController {
 
     // REST API for user creation
     @PostMapping("/createUser")
-    public ResponseEntity<String> createUser(@RequestBody UserRegistrationDto userRegistrationDto) throws NoSuchAlgorithmException {
+    public void createUser(@RequestBody UserRegistrationDto userRegistrationDto) throws NoSuchAlgorithmException {
         String httResponse = userService.createUser(userRegistrationDto);
-        return new ResponseEntity<>(httResponse, HttpStatus.CREATED);
+//        return new ResponseEntity<>(httResponse, HttpStatus.CREATED);
     }
 
     // REST API to get all users
