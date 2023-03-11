@@ -2,7 +2,6 @@ package com.delidrop.springboot.controller;
 
 import com.delidrop.springboot.dto.UserInfoDto;
 import com.delidrop.springboot.dto.UserRegistrationDto;
-import com.delidrop.springboot.entity.Test;
 import com.delidrop.springboot.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     // REST API for user creation
-    @PostMapping(value = "/addUser", produces = "application/json")
+    @PostMapping("/createUser")
     public ResponseEntity<String> createUser(@RequestBody UserRegistrationDto userRegistrationDto) throws NoSuchAlgorithmException {
         String httResponse = userService.createUser(userRegistrationDto);
         return new ResponseEntity<>(httResponse, HttpStatus.CREATED);
@@ -30,10 +29,5 @@ public class UserController {
     public ResponseEntity<List<UserInfoDto>> getAllUsers () {
         List<UserInfoDto> usersInfoDto = userService.getAllUsers();
         return new ResponseEntity<>(usersInfoDto, HttpStatus.OK);
-    }
-
-    @PostMapping("/create")
-    public Test addUser(@RequestBody Test test) {
-        return test;
     }
 }
