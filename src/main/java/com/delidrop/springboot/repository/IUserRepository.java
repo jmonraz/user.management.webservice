@@ -14,6 +14,8 @@ public interface IUserRepository {
     // method to get all users
     List<User> getAllUsers();
 
+    // method to find user by email
+    User getUserByEmail(String email);
     default User insertUser(User user) throws NoSuchAlgorithmException {
         UUID id = UUID.randomUUID();
         return insertUser(id, user);

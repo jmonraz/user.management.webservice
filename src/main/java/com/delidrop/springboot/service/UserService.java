@@ -22,6 +22,15 @@ public class UserService {
         boolean canBeCreated = true;
         String httpResponse = "Errors.";
 
+
+        if(userRegistrationDto.getFirstName() == null || userRegistrationDto.getLastName() == null
+        || userRegistrationDto.getPhoneNumber() == null || userRegistrationDto.getPassword() == null
+        || userRegistrationDto.getVerifyPassword() == null || userRegistrationDto.getEmail() == null) {
+            return "Error. Missing fields.";
+        }
+        if(userRepository.getUserByEmail(userRegistrationDto.getEmail()) != null) {
+            return "Error. Email is already registered.";
+        }
         if(!Helper.verifyPhoneNumber(userRegistrationDto.getPhoneNumber())) {
             httpResponse += "\nInvalid phone number.";
             canBeCreated = false;

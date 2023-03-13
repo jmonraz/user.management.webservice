@@ -20,8 +20,8 @@ public class UserController {
     @PostMapping("/createUser")
     public ResponseEntity<String> createUser(@RequestBody UserRegistrationDto userRegistrationDto) {
         try {
-            userService.createUser(userRegistrationDto);
-            return new ResponseEntity<>("User successfully created.", HttpStatus.CREATED);
+            String httpResponse = userService.createUser(userRegistrationDto);
+            return new ResponseEntity<>(httpResponse, HttpStatus.CREATED);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to create user. Error." + e.getMessage());
         }

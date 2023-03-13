@@ -1,9 +1,6 @@
 package com.delidrop.springboot.repository;
 
-import com.delidrop.springboot.entity.User;
-import com.delidrop.springboot.helper.DateHelper;
-import com.delidrop.springboot.helper.Encryption;
-import com.delidrop.springboot.helper.Helper;
+import com.delidrop.springboot.entity.User;import com.delidrop.springboot.helper.Helper;
 import org.springframework.stereotype.Repository;
 
 import java.security.NoSuchAlgorithmException;
@@ -41,5 +38,15 @@ public class UserRepository implements IUserRepository{
     @Override
     public List<User> getAllUsers() {
         return DB;
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        for(int i = 0; i < DB.size(); i++) {
+            if(DB.get(i).getEmail().equals(email)) {
+                return DB.get(i);
+            }
+        }
+        return null;
     }
 }
