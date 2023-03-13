@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @RestController
@@ -19,15 +18,27 @@ public class UserController {
 
     // REST API for user creation
     @PostMapping("/createUser")
-    public ResponseEntity<String> createUser(@RequestBody UserRegistrationDto userRegistrationDto) throws NoSuchAlgorithmException {
-        String httResponse = userService.createUser(userRegistrationDto);
-        return new ResponseEntity<>(httResponse, HttpStatus.CREATED);
+    public ResponseEntity<String> createUser(@RequestBody UserRegistrationDto userRegistrationDto) {
+        try {
+            userService.createUser(userRegistrationDto);
+            return new ResponseEntity<>("User successfully created.", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to create user. Error." + e.getMessage());
+        }
     }
 
     // REST API to get all users
     @GetMapping
-    public ResponseEntity<List<UserInfoDto>> getAllUsers () {
-        List<UserInfoDto> usersInfoDto = userService.getAllUsers();
-        return new ResponseEntity<>(usersInfoDto, HttpStatus.OK);
+    public ResponseEntity<?> getAllUsers () {
+        try {
+            List<UserInfoDto> allUsers = userService.getAllUsers();
+            if(allUsers.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("There are no clients");
+            } else {
+                return new ResponseEntity<>(allUsers, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
+        }
     }
 }
