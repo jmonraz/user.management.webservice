@@ -39,7 +39,10 @@ public class UserService {
             httpResponse += "\nPasswords do not match.";
             canBeCreated = false;
         }
-
+        if(!Helper.verifyEmail(userRegistrationDto.getEmail())) {
+            httpResponse += "\nInvalid email address.";
+            canBeCreated = false;
+        }
         if(canBeCreated)
         {
             User user = UserMapper.mapUserRegistrationDtoToUser(userRegistrationDto);

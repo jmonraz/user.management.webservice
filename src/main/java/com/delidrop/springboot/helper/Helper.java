@@ -84,4 +84,21 @@ public class Helper {
 
         return true;
     }
+
+    public static boolean verifyEmail(String email) {
+        if(!email.contains("@")) {
+            return false;
+        }
+        return true;
+    }
+
+    public static String formatEmail(String email) {
+
+        String formattedEmail = "";
+
+        formattedEmail = email.trim();
+        formattedEmail = formattedEmail.replaceAll("\\s","");
+
+        return formattedEmail;
+    }
 }

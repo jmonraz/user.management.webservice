@@ -15,7 +15,7 @@ public class UserRepository implements IUserRepository{
     @Override
     public User insertUser(UUID id, User user) throws NoSuchAlgorithmException {
         User newUser = new User(id, Helper.formatString(user.getFirstName()), Helper.formatString(user.getLastName()),
-                user.getEmail(), Helper.encryptString(user.getPassword()), user.getPhoneNumber(),
+                Helper.formatEmail(user.getEmail()), Helper.encryptString(user.getPassword()), user.getPhoneNumber(),
                 Helper.getCurrentTime(), Helper.getCurrentTime());
 //        user.setId(id);
 //        user.setDateCreated(DateHelper.getCurrentTime());

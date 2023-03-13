@@ -14,6 +14,7 @@ public class UserInfoDto {
     private String firstName;
     private String lastName;
     private String email;
+    private String password;
     private Long phoneNumber;
     private Date createdTime;
     private Date updatedTime;
